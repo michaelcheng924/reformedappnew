@@ -6,6 +6,7 @@ import DocumentTitle from "./DocumentTitle";
 import NavigationSlider from "./NavigationSlider";
 import ConfessionChapter from "./ConfessionChapter";
 import AllChapters from "./AllChapters";
+import ChaptersModal from "./ChaptersModal";
 
 export default function Confession({ confession, setSelectedConfession }) {
   const [chapter, setChapter] = useState(0);
@@ -45,6 +46,13 @@ export default function Confession({ confession, setSelectedConfession }) {
           numChapters={confession.content.length}
         />
       </View>
+
+      <ChaptersModal
+        showChapters={showChapters}
+        setShowChapters={setShowChapters}
+        chaptersContent={confession.content}
+        setChapter={setChapter}
+      />
     </ScrollView>
   );
 }

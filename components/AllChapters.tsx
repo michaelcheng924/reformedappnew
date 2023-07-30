@@ -4,6 +4,7 @@ import { blue } from "../constants/colors";
 export default function AllChapters({ setShowChapters, text }) {
   return (
     <Button
+      type="clear"
       onPress={() => {
         setShowChapters(true);
       }}

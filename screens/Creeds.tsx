@@ -2,9 +2,9 @@ import { StyleSheet, View } from "react-native";
 import { Button } from "@rneui/themed";
 import catechisms from "../constants/catechisms";
 import { useState } from "react";
-import Catechism from "../components/Catechism";
+import Creed from "../components/Creed";
 
-export default function Catechisms({ navigation }) {
+export default function Creeds({ navigation }) {
   const [selectedCatechism, setSelectedCatechism] = useState(null);
 
   if (selectedCatechism) {

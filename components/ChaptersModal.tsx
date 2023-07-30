@@ -3,12 +3,14 @@ import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import Modal from "react-native-modal";
 import { Entypo } from "@expo/vector-icons";
 import { SettingsContext } from "../contexts/SettingsContext";
-import { Button } from "@rneui/themed";
+import { Button, Text } from "@rneui/themed";
+import { blue } from "../constants/colors";
 
 export default function ChaptersModal({
   setShowChapters,
   showChapters,
   chaptersContent,
+  setChapter,
 }) {
   const { theme } = useContext(SettingsContext);
 
@@ -43,10 +45,24 @@ export default function ChaptersModal({
         <View>
           {chaptersContent.map((item, index) => {
             return (
-              <Button key={index}>
-                {item.chapter === "Preface" ? "" : `Chapter `}
-                {item.chapter}. {item.title}
-              </Button>
+              <TouchableOpacity
+                key={index}
+                style={styles.homeButton}
+                onPress={() => {
+                  setChapter(index);
+                  setShowChapters(false);
+                }}
+              >
+                <Text
+                  style={{
+                    color: blue,
+                  }}
+                >{`${
+                  item.chapter === "Preface"
+                    ? ""
+                    : `Chapter ${item.chapter}. ${item.title}`
+                }`}</Text>
+              </TouchableOpacity>
             );
           })}
         </View>
@@ -67,5 +83,8 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingBottom: 30,
+  },
+  homeButton: {
+    marginBottom: 20,
   },
 });
