@@ -4,9 +4,8 @@ import isEmpty from "lodash/isEmpty";
 import map from "lodash/map";
 import Modal from "react-native-modal";
 import { Entypo } from "@expo/vector-icons";
-
+import { SettingsContext } from "../contexts/SettingsContext";
 import AppText from "./AppText";
-import { SettingsContext } from "../App";
 
 export default function ScripturesModal({ setScriptures, scriptures }) {
   const { theme } = useContext(SettingsContext);

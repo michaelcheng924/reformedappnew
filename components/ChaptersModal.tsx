@@ -2,8 +2,7 @@ import { useContext } from "react";
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import Modal from "react-native-modal";
 import { Entypo } from "@expo/vector-icons";
-
-import { SettingsContext } from "../App";
+import { SettingsContext } from "../contexts/SettingsContext";
 import { Button } from "@rneui/themed";
 
 export default function ChaptersModal({

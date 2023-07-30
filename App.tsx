@@ -5,9 +5,10 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeButtons from "./components/HomeButtons";
 import Confessions from "./screens/Confessions";
-import { createContext, useState } from "react";
+import { useState } from "react";
 import Catechisms from "./screens/Catechisms";
 import Creeds from "./screens/Creeds";
+import { SettingsContext } from "./contexts/SettingsContext";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,15 +43,6 @@ function CreedsScreen({ navigation }) {
     </View>
   );
 }
-
-const SettingsContext = createContext({
-  theme: "light",
-  size: 16,
-  font: "serif",
-  setTheme: (_) => {},
-  setSize: (_) => {},
-  setFont: (_) => {},
-});
 
 export default function App() {
   const [theme, setTheme] = useState("light");

@@ -1,6 +1,6 @@
 import { ReactNode, useContext } from "react";
 import { Text } from "react-native-elements";
-import { SettingsContext } from "../App";
+import { SettingsContext } from "../contexts/SettingsContext";
 
 interface Props {
   color?: string;
