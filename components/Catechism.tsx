@@ -1,11 +1,7 @@
 import { StyleSheet, ScrollView, View } from "react-native";
-import { Text } from "@rneui/themed";
 import { useState } from "react";
 import BackToList from "./BackToList";
 import DocumentTitle from "./DocumentTitle";
-import NavigationSlider from "./NavigationSlider";
-import ConfessionChapter from "./ConfessionChapter";
-import AllChapters from "./AllChapters";
 import ReadCatechism from "./ReadCatechism";
 
 export default function Catechism({ catechism, setSelectedCatechism }) {
@@ -19,29 +15,7 @@ export default function Catechism({ catechism, setSelectedCatechism }) {
       <BackToList setSelected={setSelectedCatechism} text="Catechisms List" />
       <DocumentTitle title={catechism.title} />
       <View style={styles.bodyContainer}>
-        <AllChapters setShowChapters={setShowChapters} text="All Chapters" />
-        <NavigationSlider
-          chapter={chapter}
-          setChapter={setChapter}
-          numChapters={catechism.content.length}
-        />
-        <View style={styles.chapterContainer}>
-          <Text
-            h3
-            h3Style={{
-              textAlign: "center",
-            }}
-          >
-            {chapterContent.chapter === "Preface" ? "" : `Chapter `}
-            {chapterContent.chapter}. {chapterContent.title}
-          </Text>
-        </View>
         <ReadCatechism catechism={catechism} />
-        <NavigationSlider
-          chapter={chapter}
-          setChapter={setChapter}
-          numChapters={catechism.content.length}
-        />
       </View>
     </ScrollView>
   );
@@ -64,10 +38,5 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingTop: 10,
     paddingBottom: 10,
-  },
-  chapterContainer: {
-    display: "flex",
-    minHeight: 106,
-    justifyContent: "center",
   },
 });

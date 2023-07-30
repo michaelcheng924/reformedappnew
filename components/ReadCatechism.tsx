@@ -42,6 +42,7 @@ export default function ReadCatechism({ catechism }) {
                 <TouchableOpacity
                   key={index}
                   onPress={() => {
+                    setScriptures([]);
                     axios
                       .post("https://mcc-admin.herokuapp.com/scriptures", {
                         scripture: item.scriptures,
@@ -53,7 +54,7 @@ export default function ReadCatechism({ catechism }) {
                         });
                       })
                       .catch(() => {
-                        setScriptures([]);
+                        setScriptures("error");
                       });
                   }}
                   style={[
@@ -181,6 +182,7 @@ export default function ReadCatechism({ catechism }) {
                           <TouchableOpacity
                             key={index1}
                             onPress={() => {
+                              setScriptures([]);
                               axios
                                 .post(
                                   "https://mcc-admin.herokuapp.com/scriptures",
@@ -195,7 +197,7 @@ export default function ReadCatechism({ catechism }) {
                                   });
                                 })
                                 .catch(() => {
-                                  setScriptures([]);
+                                  setScriptures("error");
                                 });
                             }}
                           >
@@ -217,6 +219,7 @@ export default function ReadCatechism({ catechism }) {
                       <TouchableOpacity
                         key={index}
                         onPress={() => {
+                          setScriptures([]);
                           axios
                             .post(
                               "https://mcc-admin.herokuapp.com/scriptures",
@@ -231,7 +234,7 @@ export default function ReadCatechism({ catechism }) {
                               });
                             })
                             .catch(() => {
-                              setScriptures([]);
+                              setScriptures("error");
                             });
                         }}
                       >
