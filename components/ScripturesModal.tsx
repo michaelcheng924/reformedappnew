@@ -38,11 +38,13 @@ export default function ScripturesModal({ setScriptures, scriptures }) {
             }}
           />
         </TouchableOpacity>
-        {isEmpty(scriptures) ? (
+        {scriptures === "error" ? (
           <AppText>
             There is no data to display. Maybe you're not connected to the
             internet, or there is a problem with the Scripture reference.
           </AppText>
+        ) : isEmpty(scriptures) ? (
+          <AppText>Loading...</AppText>
         ) : (
           <View>
             <View

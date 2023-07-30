@@ -89,8 +89,9 @@ export default function ConfessionChapter({ chapterContent, confession }) {
                     <TouchableOpacity
                       key={index1}
                       onPress={() => {
+                        setScriptures([]);
                         axios
-                          .post("http://localhost:3002/api/scriptures", {
+                          .post("https://rwnextapi.vercel.app/api/scriptures", {
                             scripture: section.scriptures,
                           })
                           .then((response) => {
@@ -100,7 +101,7 @@ export default function ConfessionChapter({ chapterContent, confession }) {
                             });
                           })
                           .catch(() => {
-                            setScriptures([]);
+                            setScriptures("error");
                           });
                       }}
                     >
@@ -118,12 +119,7 @@ export default function ConfessionChapter({ chapterContent, confession }) {
           </View>
         );
       })}
-      {scriptures && (
-        <ScripturesModal
-          scriptures={scriptures}
-          setScriptures={setScriptures}
-        />
-      )}
+      <ScripturesModal scriptures={scriptures} setScriptures={setScriptures} />
     </View>
   );
 }

@@ -4,7 +4,13 @@ import { StyleSheet, View } from "react-native";
 export default function HomeButtons({ navigation }) {
   return (
     <View>
-      <Button radius={"sm"} type="solid" size="lg" style={styles.homeButton}>
+      <Button
+        radius={"sm"}
+        type="solid"
+        size="lg"
+        style={styles.homeButton}
+        onPress={() => navigation.navigate("CatechismsScreen")}
+      >
         Catechisms
       </Button>
       <Button
@@ -16,10 +22,22 @@ export default function HomeButtons({ navigation }) {
       >
         Confessions
       </Button>
-      <Button radius={"sm"} type="solid" size="lg" style={styles.homeButton}>
+      <Button
+        radius={"sm"}
+        type="solid"
+        size="lg"
+        style={styles.homeButton}
+        onPress={() => navigation.navigate("CreedsScreen")}
+      >
         Creeds
       </Button>
-      <Button radius={"sm"} type="solid" size="lg" style={styles.homeButton}>
+      <Button
+        radius={"sm"}
+        type="solid"
+        size="lg"
+        style={styles.homeButton}
+        onPress={() => navigation.navigate("AboutScreen")}
+      >
         About / Support
       </Button>
     </View>
