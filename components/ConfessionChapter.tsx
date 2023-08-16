@@ -6,10 +6,10 @@ import { Button } from "@rneui/themed";
 import { useState } from "react";
 import ScripturesModal from "./ScripturesModal";
 
-let footnote = 0;
-let footnote1 = 0;
-
 export default function ConfessionChapter({ chapterContent, confession }) {
+  let footnote = 0;
+  let footnote1 = 0;
+
   const [scriptures, setScriptures] = useState(null);
 
   if (typeof chapterContent.content[0] === "string") {

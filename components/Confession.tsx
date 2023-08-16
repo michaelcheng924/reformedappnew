@@ -22,18 +22,8 @@ export default function Confession({ confession }) {
           chapter={chapter}
           setChapter={setChapter}
           numChapters={confession.content.length}
+          chapterContent={chapterContent}
         />
-        <View style={styles.chapterContainer}>
-          <Text
-            h3
-            h3Style={{
-              textAlign: "center",
-            }}
-          >
-            {chapterContent.chapter === "Preface" ? "" : `Chapter `}
-            {chapterContent.chapter}. {chapterContent.title}
-          </Text>
-        </View>
         <ConfessionChapter
           chapterContent={chapterContent}
           confession={confession}
@@ -42,6 +32,7 @@ export default function Confession({ confession }) {
           chapter={chapter}
           setChapter={setChapter}
           numChapters={confession.content.length}
+          chapterContent={chapterContent}
         />
       </View>
 
@@ -72,10 +63,5 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingTop: 10,
     paddingBottom: 10,
-  },
-  chapterContainer: {
-    display: "flex",
-    minHeight: 106,
-    justifyContent: "center",
   },
 });
