@@ -1,25 +1,21 @@
 import { StyleSheet, ScrollView, View } from "react-native";
 import { useState } from "react";
-import BackToList from "./BackToList";
 import DocumentTitle from "./DocumentTitle";
 import ReadCatechism from "./ReadCatechism";
 
-export default function Catechism({ catechism, setSelectedCatechism }) {
+export default function Catechism({ catechism }) {
   const [chapter, setChapter] = useState(0);
   const [showChapters, setShowChapters] = useState(false);
 
   const chapterContent = catechism.content[chapter];
 
   return (
-    // <ScrollView style={styles.root}>
     <>
-      <BackToList setSelected={setSelectedCatechism} text="Catechisms List" />
       <DocumentTitle title={catechism.title} />
       <View style={styles.bodyContainer}>
         <ReadCatechism catechism={catechism} />
       </View>
     </>
-    // </ScrollView>
   );
 }
 
@@ -36,6 +32,7 @@ const styles = StyleSheet.create({
     width: 40,
   },
   bodyContainer: {
+    flex: 1,
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 10,

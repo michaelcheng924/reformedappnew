@@ -6,8 +6,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import DocumentsList from "./components/DocumentsList";
 import { useState } from "react";
 import { SettingsContext } from "./contexts/SettingsContext";
+import catechisms from "./constants/catechisms";
 import confessions from "./constants/confessions";
 import Confession from "./components/Confession";
+import Catechism from "./components/Catechism";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +41,13 @@ export default function App() {
         >
           <Stack.Navigator>
             <Stack.Screen name="Home" component={HomeScreen} />
+            {catechisms.map((item, index) => {
+              return (
+                <Stack.Screen key={index} name={item.title}>
+                  {() => <Catechism catechism={item} />}
+                </Stack.Screen>
+              );
+            })}
             {confessions.map((item, index) => {
               return (
                 <Stack.Screen key={index} name={item.title}>
