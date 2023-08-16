@@ -11,13 +11,15 @@ export default function Catechism({ catechism, setSelectedCatechism }) {
   const chapterContent = catechism.content[chapter];
 
   return (
-    <ScrollView style={styles.root}>
+    // <ScrollView style={styles.root}>
+    <>
       <BackToList setSelected={setSelectedCatechism} text="Catechisms List" />
       <DocumentTitle title={catechism.title} />
       <View style={styles.bodyContainer}>
         <ReadCatechism catechism={catechism} />
       </View>
-    </ScrollView>
+    </>
+    // </ScrollView>
   );
 }
 

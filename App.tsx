@@ -3,43 +3,18 @@ import { View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeButtons from "./components/HomeButtons";
-import Confessions from "./screens/Confessions";
+import DocumentsList from "./components/DocumentsList";
 import { useState } from "react";
-import Catechisms from "./screens/Catechisms";
-import Creeds from "./screens/Creeds";
 import { SettingsContext } from "./contexts/SettingsContext";
+import confessions from "./constants/confessions";
+import Confession from "./components/Confession";
 
 const Stack = createNativeStackNavigator();
 
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <HomeButtons navigation={navigation} />
-    </View>
-  );
-}
-
-function CatechismsScreen({ navigation }) {
-  return (
-    <View>
-      <Catechisms navigation={navigation} />
-    </View>
-  );
-}
-
-function ConfessionsScreen({ navigation }) {
-  return (
-    <View>
-      <Confessions navigation={navigation} />
-    </View>
-  );
-}
-
-function CreedsScreen({ navigation }) {
-  return (
-    <View>
-      <Creeds navigation={navigation} />
+      <DocumentsList navigation={navigation} />
     </View>
   );
 }
@@ -64,21 +39,13 @@ export default function App() {
         >
           <Stack.Navigator>
             <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen
-              name="CatechismsScreen"
-              component={CatechismsScreen}
-              options={{ title: "Catechisms" }}
-            />
-            <Stack.Screen
-              name="ConfessionsScreen"
-              component={ConfessionsScreen}
-              options={{ title: "Confessions" }}
-            />
-            <Stack.Screen
-              name="CreedsScreen"
-              component={CreedsScreen}
-              options={{ title: "Creeds" }}
-            />
+            {confessions.map((item, index) => {
+              return (
+                <Stack.Screen key={index} name={item.title}>
+                  {() => <Confession confession={item} />}
+                </Stack.Screen>
+              );
+            })}
           </Stack.Navigator>
         </SettingsContext.Provider>
         <StatusBar style="auto" />

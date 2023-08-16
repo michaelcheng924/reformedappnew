@@ -1,14 +1,13 @@
 import { StyleSheet, ScrollView, View } from "react-native";
 import { Text } from "@rneui/themed";
 import { useState } from "react";
-import BackToList from "./BackToList";
 import DocumentTitle from "./DocumentTitle";
 import NavigationSlider from "./NavigationSlider";
 import ConfessionChapter from "./ConfessionChapter";
 import AllChapters from "./AllChapters";
 import ChaptersModal from "./ChaptersModal";
 
-export default function Confession({ confession, setSelectedConfession }) {
+export default function Confession({ confession }) {
   const [chapter, setChapter] = useState(0);
   const [showChapters, setShowChapters] = useState(false);
 
@@ -16,7 +15,6 @@ export default function Confession({ confession, setSelectedConfession }) {
 
   return (
     <ScrollView style={styles.root}>
-      <BackToList setSelected={setSelectedConfession} text="Confessions List" />
       <DocumentTitle title={confession.title} />
       <View style={styles.bodyContainer}>
         <AllChapters setShowChapters={setShowChapters} text="All Chapters" />
