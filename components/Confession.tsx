@@ -1,20 +1,28 @@
 import { StyleSheet, ScrollView, View } from "react-native";
 import { Text } from "@rneui/themed";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DocumentTitle from "./DocumentTitle";
 import NavigationSlider from "./NavigationSlider";
 import ConfessionChapter from "./ConfessionChapter";
 import AllChapters from "./AllChapters";
 import ChaptersModal from "./ChaptersModal";
 
+let scrollRef;
+
 export default function Confession({ confession }) {
   const [chapter, setChapter] = useState(0);
   const [showChapters, setShowChapters] = useState(false);
 
+  useEffect(() => {
+    if (scrollRef) {
+      scrollRef.scrollTo({ x: 0, y: 0, animated: false });
+    }
+  }, [chapter]);
+
   const chapterContent = confession.content[chapter];
 
   return (
-    <ScrollView style={styles.root}>
+    <ScrollView style={styles.root} ref={(ref) => (scrollRef = ref)}>
       <DocumentTitle title={confession.title} />
       <View style={styles.bodyContainer}>
         <AllChapters setShowChapters={setShowChapters} text="All Chapters" />
@@ -33,6 +41,7 @@ export default function Confession({ confession }) {
           setChapter={setChapter}
           numChapters={confession.content.length}
           chapterContent={chapterContent}
+          hideSlider
         />
       </View>
 

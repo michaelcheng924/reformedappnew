@@ -9,6 +9,7 @@ export default function NavigationSlider({
   setChapter,
   numChapters,
   chapterContent,
+  hideSlider,
 }) {
   const [showSlider, setShowSlider] = useState(true);
 
@@ -39,7 +40,7 @@ export default function NavigationSlider({
             />
           </View>
         </TouchableOpacity>
-        {showSlider && (
+        {showSlider && !hideSlider && (
           <Slider
             value={chapter}
             onValueChange={(value) => {
@@ -99,6 +100,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
+    justifyContent: "space-between",
     paddingLeft: 15,
     paddingRight: 15,
   },
