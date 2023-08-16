@@ -2,87 +2,22 @@ import { useState } from "react";
 import isArray from "lodash/isArray";
 import some from "lodash/some";
 import axios from "axios";
-import {
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  FlatList,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, View, FlatList } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 
-import AppText from "./AppText";
-import ScripturesModal from "./ScripturesModal";
-import DocumentTitle from "./DocumentTitle";
+import AppText from "../AppText";
+import ScripturesModal from "../ScripturesModal";
+import DocumentTitle from "../DocumentTitle";
+import CatechismQuestion from "./CatechismQuestion";
 
 let scrollView;
 
 export default function ReadCatechism({ catechism }) {
   const [scriptures, setScriptures] = useState(null);
 
-  let footnote = 0;
-  let footnote1 = 0;
-
-  function renderQuestion(item, index) {
-    return (
-      <View>
-        <AppText bold isHeading>
-          {index + 1}.{" "}
-          {isArray(item.question)
-            ? item.question.map((item, index) => {
-                return (
-                  <AppText key={index}>
-                    <AppText bold isHeading>
-                      {item.text}
-                    </AppText>
-                    <AppText bold color="#9e9e9e" isHeading>
-                      ({index + 1})
-                    </AppText>
-                  </AppText>
-                );
-              })
-            : item.question}
-        </AppText>
-        {isArray(item.question)
-          ? item.question.map((item, index) => {
-              return (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => {
-                    setScriptures([]);
-                    axios
-                      .post("https://mcc-admin.herokuapp.com/scriptures", {
-                        scripture: item.scriptures,
-                      })
-                      .then((response) => {
-                        setScriptures({
-                          text: item.text,
-                          scriptures: response.data.results,
-                        });
-                      })
-                      .catch(() => {
-                        setScriptures("error");
-                      });
-                  }}
-                  style={[
-                    styles.answer,
-                    {
-                      marginBottom: 15,
-                    },
-                  ]}
-                >
-                  <AppText color="#489D89">
-                    ({index + 1}) {item.scriptures}
-                  </AppText>
-                </TouchableOpacity>
-              );
-            })
-          : null}
-      </View>
-    );
-  }
-
   function renderAnswer(item, index) {
+    let footnote = 0;
+
     if (isArray(item.answer[0])) {
       return (
         <View key={index}>
@@ -142,6 +77,8 @@ export default function ReadCatechism({ catechism }) {
   }
 
   function renderItem({ item, index }) {
+    let footnote1 = 0;
+
     if (item.isTitle) {
       return <DocumentTitle title={catechism.title} />;
     }
@@ -156,7 +93,11 @@ export default function ReadCatechism({ catechism }) {
           paddingBottom: 10,
         }}
       >
-        {renderQuestion(item, index - 1)}
+        <CatechismQuestion
+          item={item}
+          index={index - 1}
+          setScriptures={setScriptures}
+        />
         {renderAnswer(item, index - 1)}
         {some(item.answer, (item1) => {
           if (isArray(item1)) {
