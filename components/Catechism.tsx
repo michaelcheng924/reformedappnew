@@ -1,17 +1,11 @@
-import { StyleSheet, ScrollView, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useState } from "react";
 import DocumentTitle from "./DocumentTitle";
 import ReadCatechism from "./ReadCatechism";
 
 export default function Catechism({ catechism }) {
-  const [chapter, setChapter] = useState(0);
-  const [showChapters, setShowChapters] = useState(false);
-
-  const chapterContent = catechism.content[chapter];
-
   return (
     <>
-      <DocumentTitle title={catechism.title} />
       <View style={styles.bodyContainer}>
         <ReadCatechism catechism={catechism} />
       </View>
@@ -33,9 +27,5 @@ const styles = StyleSheet.create({
   },
   bodyContainer: {
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 10,
-    paddingBottom: 10,
   },
 });

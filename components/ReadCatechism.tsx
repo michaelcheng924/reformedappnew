@@ -13,6 +13,7 @@ import { Entypo } from "@expo/vector-icons";
 
 import AppText from "./AppText";
 import ScripturesModal from "./ScripturesModal";
+import DocumentTitle from "./DocumentTitle";
 
 let scrollView;
 
@@ -141,15 +142,22 @@ export default function ReadCatechism({ catechism }) {
   }
 
   function renderItem({ item, index }) {
+    if (item.isTitle) {
+      return <DocumentTitle title={catechism.title} />;
+    }
+
     return (
       <View
         key={index}
         style={{
-          marginBottom: 35,
+          paddingLeft: 15,
+          paddingRight: 15,
+          paddingTop: 10,
+          paddingBottom: 10,
         }}
       >
-        {renderQuestion(item, index)}
-        {renderAnswer(item, index)}
+        {renderQuestion(item, index - 1)}
+        {renderAnswer(item, index - 1)}
         {some(item.answer, (item1) => {
           if (isArray(item1)) {
             return some(item1, (item2) => {
@@ -241,118 +249,12 @@ export default function ReadCatechism({ catechism }) {
         flex: 1,
       }}
     >
-      {/* <ScrollView
-        ref={(node) => (scrollView = node)}
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-      > */}
       <ScripturesModal setScriptures={setScriptures} scriptures={scriptures} />
       <FlatList
-        data={catechism.content}
+        data={[{ isTitle: true }].concat(catechism.content)}
         renderItem={renderItem}
         keyExtractor={(item) => item.number}
       />
-      {/* {catechism.content.map((item, index) => {
-          return (
-            <View
-              key={index}
-              style={{
-                marginBottom: 35,
-              }}
-            >
-              {renderQuestion(item, index)}
-              {renderAnswer(item, index)}
-              {some(item.answer, (item1) => {
-                if (isArray(item1)) {
-                  return some(item1, (item2) => {
-                    return item2.scriptures;
-                  });
-                }
-
-                return item1.scriptures;
-              }) ? (
-                <View style={[styles.answer, styles.scriptures]}>
-                  {item.answer.map((item, index) => {
-                    if (isArray(item)) {
-                      return item.map((item2, index1) => {
-                        if (item2.scriptures) {
-                          footnote1 += 1;
-                        } else {
-                          return null;
-                        }
-
-                        return (
-                          <TouchableOpacity
-                            key={index1}
-                            onPress={() => {
-                              setScriptures([]);
-                              axios
-                                .post(
-                                  "https://mcc-admin.herokuapp.com/scriptures",
-                                  {
-                                    scripture: item2.scriptures,
-                                  }
-                                )
-                                .then((response) => {
-                                  setScriptures({
-                                    text: item2.text,
-                                    scriptures: response.data.results,
-                                  });
-                                })
-                                .catch(() => {
-                                  setScriptures("error");
-                                });
-                            }}
-                          >
-                            <AppText color="#489D89">
-                              ({footnote1}) {item2.scriptures}
-                            </AppText>
-                          </TouchableOpacity>
-                        );
-                      });
-                    }
-
-                    if (item.scriptures) {
-                      footnote1 += 1;
-                    } else {
-                      return null;
-                    }
-
-                    return (
-                      <TouchableOpacity
-                        key={index}
-                        onPress={() => {
-                          setScriptures([]);
-                          axios
-                            .post(
-                              "https://mcc-admin.herokuapp.com/scriptures",
-                              {
-                                scripture: item.scriptures,
-                              }
-                            )
-                            .then((response) => {
-                              setScriptures({
-                                text: item.text,
-                                scriptures: response.data.results,
-                              });
-                            })
-                            .catch(() => {
-                              setScriptures("error");
-                            });
-                        }}
-                      >
-                        <AppText color="#489D89">
-                          ({footnote1}) {item.scriptures}
-                        </AppText>
-                      </TouchableOpacity>
-                    );
-                  })}
-                </View>
-              ) : null}
-            </View>
-          );
-        })} */}
-      {/* </ScrollView> */}
       <TouchableOpacity
         onPress={() => {
           if (scrollView) {
