@@ -1,7 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { useState } from "react";
-import DocumentTitle from "./DocumentTitle";
-import ReadCatechism from "./ReadCatechism";
+import ReadCatechism from "../ReadCatechism";
 
 export default function Catechism({ catechism }) {
   return (
